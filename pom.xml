@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>RahulShettyAcademyCompany</groupId>
+  <artifactId>SeleniumFrameworkDesign</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>SeleniumFrameworkDesign</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  
+    <dependencies>
+    
+      <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.44.0</version>
+    <scope>compile</scope>
+</dependency>
+
+
+    <!-- Source: https://mvnrepository.com/artifact/org.testng/testng Use 7+ version if having java 12 or higher else use 6.xx -->
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.12.0</version>
+    <scope>test</scope>
+</dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.34.3</version>
+    <scope>compile</scope>
+</dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-testng</artifactId>
+    <version>7.34.3</version>
+    <scope>compile</scope>
+</dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanage for downloading chrome driver etcr -->
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>6.3.4</version>
+    <scope>compile</scope>
+</dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>tools.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>3.2.0</version>
+    <scope>compile</scope>
+</dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.1.2</version>
+    <scope>compile</scope>
+</dependency>
+
+
+    </dependencies>
+    
+    <profiles>   <!--first navigate to project folder in cmd prompt first give D: to move to D drive then cd D:\eclipse-java-2026-03-R-win32-x86_64\eclipse\Selenium_Workspace\SeleniumFrameworkDesign pom.xml should be there in the Project structure before executing commands-->
+    	<profile><!--run mvn test -PRegression or any profile name from command prompt follow the below syntax-->
+    	<id>Regression</id>
+    	  <!--Add Maven Surefire plugin to execute commands from terminal-->
+   <build>
+    <!--no pluginManagement needed-->
+      <plugins>
+		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+                <suiteXmlFiles>
+                    <!-- Provide the path relative to the project root, give the path fof the testng.xml files you want to run -->
+                    <suiteXmlFile>src/main/java/testSuites/testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+            </configuration>
+        </plugin>
+    	</plugins>
+   
+    </build>	
+    </profile> 
+    
+    <!--Profile to run the cucumber's TestNGTestRunner & featurefiles from mvn/cmd/jenkins-->
+    <profile><!--run mvn test -PCucumberTests or any profile name from command prompt follow the below syntax-->
+    	<id>CucumberTests</id>
+    	  <!--Add Maven Surefire plugin to execute commands from terminal-->
+   <build>
+    <!--no pluginManagement needed-->
+      <plugins>
+		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+                <!--suiteXmlFiles no need of suiteXmlFiles and nested suiteXmlFile since we are executing java file we have to use includes and include-->
+                   <includes>
+                   <include>**/TestNGTestRunner.java</include>  <!--Path of the cucumber testng testrunner-->
+                   </includes>
+            </configuration>
+        </plugin>
+    	</plugins>
+   
+    </build>	
+    </profile> 
+    
+    <profile><!--run mvn test -PPurchase or any profile name from command prompt follow the below syntax-->
+    	<id>Purchase</id>
+    	  <!--Add Maven Surefire plugin to execute commands from terminal-->
+   <build>  
+      <plugins>
+		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+                <suiteXmlFiles>
+                    <!-- Provide the path relative to the project root, give the path fof the testng.xml files you want to run -->
+                    <suiteXmlFile>src/main/java/testSuites/Purchase.xml</suiteXmlFile>
+                </suiteXmlFiles>
+            </configuration>
+        </plugin>
+    	</plugins>   
+    </build>	
+    </profile> 
+    
+    <profile><!--run mvn test -PErrorValidations or any profile name from command prompt follow the below syntax-->
+    	<id>ErrorValidations</id>
+    	  <!--Add Maven Surefire plugin to execute commands from terminal-->
+   <build>
+      <plugins>
+		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+                <suiteXmlFiles>
+                    <!-- Provide the path relative to the project root, give the path fof the testng.xml files you want to run -->
+                    <suiteXmlFile>src/main/java/testSuites/ErrorValidations.xml</suiteXmlFile>
+                </suiteXmlFiles>
+            </configuration>
+        </plugin>
+    	</plugins>
+    </build>	
+    </profile>     
+    </profiles>
+    
+    <!--close all profiles with /profiles-->
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+     
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.4.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.6.1</version>
+        </plugin>
+                 
+      </plugins>    
+    </pluginManagement>
+  </build>
+</project>

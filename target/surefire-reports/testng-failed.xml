@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Surefire suite]" verbose="0">
+  <test thread-count="5" name="Surefire test(failed)" verbose="0">
+    <classes>
+      <class name="rahulshettyacademy.tests.SubmitOrderPOMTest">
+        <methods>
+          <include name="checkOrderHistory"/>
+          <include name="tearDown"/>
+          <include name="SubmitOrderTest" invocation-numbers="0"/>
+          <include name="launchApplication"/>
+        </methods>
+      </class> <!-- rahulshettyacademy.tests.SubmitOrderPOMTest -->
+      <class name="rahulshettyacademy.tests.ErrorValidationsTest">
+        <methods>
+          <include name="LoginErrorMsgTest"/>
+          <include name="tearDown"/>
+          <include name="launchApplication"/>
+        </methods>
+      </class> <!-- rahulshettyacademy.tests.ErrorValidationsTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->

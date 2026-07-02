@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests">  <!--parallel=test/classes/methods also and threaccount means number of Tests/methods in each class it can run-->
+ <groups>
+ 	<run>
+ 		<include name="Purchase"/>  <!--runs only 1 test case belonging to Purchase group-->
+ 	</run>
+ </groups>
+
+
+  <test thread-count="5" name="Submit Order E2E Test">
+    <classes>
+      <class name="rahulshettyacademy.tests.SubmitOrderPOMTest"/>
+      
+    </classes>
+  </test> <!-- Test -->
+  
+  <!--seperating classes to 2 different tests in testng.xml-->
+  <test thread-count="5" name="Error Validations Test">
+    <classes>
+         <class name="rahulshettyacademy.tests.ErrorValidationsTest"/>
+    </classes>
+  </test> <!-- Test -->
+  
+</suite> <!-- Suite -->
