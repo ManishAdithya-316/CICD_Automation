@@ -1,0 +1,45 @@
+Steps to configure Github Webhooks
+1)In Jenkins configure build, enable this option GitHub hook trigger for GITScm polling?
+2)In Github under repositroy add a new webhook
+3)Webhook won't for localhost urls so use ngrock and follow these steps to make your localhost url public
+& use it in that webhook note In Jenkins->Settings->System->GitHub->GitHub servers->Advanced->Overrride hook url we get the github webhook url 
+http://localhost:8080/github-webhook/ 
+
+4)⚙️ Step‑by‑Step for CMD
+
+A)Verify Jenkins is running
+Open CMD and check Jenkins is accessible locally:
+
+bash
+curl http://localhost:8080
+If you see HTML output or “Jenkins” text, it’s running fine.
+
+2️)Authenticate ngrok
+Run this once (replace with your real token from the ngrok dashboard):
+bash
+ngrok config add-authtoken YOUR_AUTHTOKEN
+
+3️)Start the tunnel
+Expose Jenkins port 8080:
+
+bash
+ngrok http 8080
+
+4️)Copy your public URL
+After running the above command, you’ll see something like:
+
+Code
+Forwarding  https://abcd1234.ngrok-free.app -> http://localhost:8080
+That https://abcd1234.ngrok-free.app link is your public Jenkins URL.
+
+5️)Keep CMD open
+The tunnel stays active only while that CMD window is running. If you close it, the public link stops working.
+
+After getting ngrock url https://croak-creed-lid.ngrok-free.dev/github-webhook/ put this in github
+
+Make any changes to the project add comments,etc
+Then do git add *, git commit -m "commit message", finally git push origin main
+
+Github should trigger te Jenkins webhook and Jenkins should trigger the build automatically this process is called CICD(Continuous Integration,Continuous Delivery)
+followed by big comapnies like Amazon,Google,etc
+
